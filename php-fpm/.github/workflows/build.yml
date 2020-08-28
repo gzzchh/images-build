@@ -1,0 +1,40 @@
+name: 构建容器镜像
+
+# 触发条件：在 push 到 master 分支后
+on:
+  push:
+    paths:
+      - "php-fpm/**"
+
+# 任务
+jobs:
+  build-php-fpm-73:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 构建 PHP-FPM-73 镜像
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.TKE_USERNAME }}
+          password: ${{ secrets.TKE_PASSWORD }}
+          path: ./php-fpm
+          dockerfile: ./php-fpm/Dockerfile.php.73
+          registry: ccr.ccs.tencentyun.com
+          repository: gzzchh/stacks
+          tags: php-fpm-73
+  build-php-fpm-74:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 构建 PHP-FPM-74 镜像
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.TKE_USERNAME }}
+          password: ${{ secrets.TKE_PASSWORD }}
+          path: ./php-fpm
+          dockerfile: ./php-fpm/Dockerfile.php.73
+          registry: ccr.ccs.tencentyun.com
+          repository: gzzchh/stacks
+          tags: php-fpm-74

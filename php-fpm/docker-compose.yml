@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  php73:
+    restart: always
+    container_name: php73
+    image: ccr.ccs.tencentyun.com/gzzchh/stacks:php-fpm-73
+    volumes:
+      # 首先我们挂载主配置文件
+      - ./php73/php.ini:/usr/local/etc/php/php.ini
+      - ./php73/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      # 然后直接覆盖整个php-fpm.d
+      - ./php73/php-fpm.d:/usr/local/etc/php-fpm.d
+      # 接下来是对外挂载Sock
+      - /tmp/php/php73:/tmp/php
+      # 还有Log目录
+      - ./log/php73:/var/log/php
+      # 以下是因版本而异的
+      # 首先把扩展挂载进去
+      - ./php73/ext:/usr/local/lib/php/extensions/ext
+      # 加载配置文件,注意要一个一个加载
+      - ./php73/php.d/00-ioncube.ini:/usr/local/etc/php/conf.d/00-ioncube.ini
+      - /data/wwwroot:/data/wwwroot
+
+  php74:
+    restart: always
+    container_name: php74
+    image: ccr.ccs.tencentyun.com/gzzchh/stacks:php-fpm-74
+    volumes:
+      # 首先我们挂载主配置文件
+      - ./php74/php.ini:/usr/local/etc/php/php.ini
+      - ./php74/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      # 然后直接覆盖整个php-fpm.d
+      - ./php74/php-fpm.d:/usr/local/etc/php-fpm.d
+      # 接下来是对外挂载Sock
+      - /tmp/php/php74:/tmp/php
+      # 还有Log目录
+      - ./log/php74:/var/log/php
+      - /data/wwwroot:/data/wwwroot
