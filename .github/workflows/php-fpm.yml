@@ -3,8 +3,8 @@ name: 构建 PHP-FPM 镜像
 # 触发条件：在 push 到 master 分支后
 on:
   push:
-    paths:
-      - "php-fpm/**"
+    # paths:
+    #   - "php-fpm/**"
 
 # 任务
 jobs:
@@ -23,6 +23,7 @@ jobs:
           registry: ccr.ccs.tencentyun.com
           repository: gzzchh/stacks
           tags: php-fpm-73
+
   build-php-fpm-74:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +35,7 @@ jobs:
           username: ${{ secrets.TKE_USERNAME }}
           password: ${{ secrets.TKE_PASSWORD }}
           path: ./php-fpm
-          dockerfile: ./php-fpm/Dockerfile.php.73
+          dockerfile: ./php-fpm/Dockerfile.php.74
           registry: ccr.ccs.tencentyun.com
           repository: gzzchh/stacks
           tags: php-fpm-74
