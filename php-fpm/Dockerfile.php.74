@@ -1,13 +1,12 @@
-FROM php:7.4-fpm
+FROM php:7.4-fpm as builder
 
 # COPY pip.conf /root/.pip/pip.conf
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 # RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
-#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
+#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
 RUN cat /etc/apt/sources.list && \
-    # 系统更新
     DEBIAN_FRONTEND=noninteractive && \
-    apt update && apt upgrade -y &&\
+    apt update && \
     # 安装组件
     apt install -y --no-install-recommends \
     bash \
@@ -57,34 +56,41 @@ RUN cat /etc/apt/sources.list && \
     # Composer相关部分
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
-    rm composer-setup.php && \
-    # composer config -g repos.packagist composer https://mirrors.cloud.tencent.com/composer/ && \
-    # composer global require hirak/prestissimo && \
-    # composer global require slince/composer-registry-manager ^2.0 && \
-    # composer repo:use tencent && \
-    # composer clearcache && \
-    # Python设定
-    # update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
-    # update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
-    # pip3 install -U pip && \
-    # 清理
-    apt remove gcc augeas-lenses python3-dev make autoconf -y && apt autoremove -y && \
-    apt remove -y \
-    libzip-dev \
-    libbz2-dev \
-    libcurl4-openssl-dev \
-    libmcrypt-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libicu-dev \
-    libxslt-dev \
-    libffi-dev \
-    libsqlite3-dev \
-    libpq-dev && \
-    rm -rf /var/lib/apt/lists/* && \
-    # 处理用户的部分
-    addgroup --gid 1000 www && \
+    rm composer-setup.php 
+
+# 只安装需要的东西
+FROM php:7.4-fpm as run
+# RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
+#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
+RUN cat /etc/apt/sources.list && \
+    DEBIAN_FRONTEND=noninteractive && \
+    # 安装组件
+    apt update && \
+    apt install -y --no-install-recommends \
+    bash \
+    unzip \
+    openssh-client \
+    wget \
+    curl \
+    libcurl4 \
+    openssl \
+    git \
+    ca-certificates \
+    libzip4 \
+    libxslt1.1 \
+    libpq5 \
+    libmagickwand-6.q16-6 \
+    libmagickwand-6.q16hdri-6 \
+    libpng16-16
+# 拷贝编译好的扩展
+COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
+COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
+# 安装 Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
+    rm composer-setup.php 
+# 处理用户的部分
+RUN addgroup --gid 1000 www && \
     adduser --disabled-password --gecos "" --uid 1000 --gid 1000 www
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
