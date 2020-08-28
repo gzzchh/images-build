@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.3-fpm AS builder 
 
 # COPY pip.conf /root/.pip/pip.conf
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
@@ -54,7 +54,7 @@ RUN cat /etc/apt/sources.list && \
     docker-php-source delete
 
 # 只安装需要的东西
-FROM php:7.4-fpm as run
+FROM php:7.4-fpm AS run
 # RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
 #     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
 RUN cat /etc/apt/sources.list && \
