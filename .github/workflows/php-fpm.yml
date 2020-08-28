@@ -14,27 +14,27 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 构建 PHP-FPM-73 镜像
-        uses: docker/build-push-action@v1
+        uses: whoan/docker-build-with-cache-action@v5
         with:
-          username: ${{ secrets.TKE_USERNAME }}
-          password: ${{ secrets.TKE_PASSWORD }}
-          path: ./php-fpm
+          username: "${{ secrets.HUB_USERNAME }}"
+          password: "${{ secrets.HUB_PASSWORD }}"
+          image_name: gzzchh/stacks
+          image_tag: php-fpm-73
+          context: ./php-fpm
           dockerfile: ./php-fpm/Dockerfile.php.73
-          registry: ccr.ccs.tencentyun.com
-          repository: gzzchh/stacks
-          tags: php-fpm-73
-  build-php-fpm-74:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v2
-      - name: 构建 PHP-FPM-74 镜像
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.TKE_USERNAME }}
-          password: ${{ secrets.TKE_PASSWORD }}
-          path: ./php-fpm
-          dockerfile: ./php-fpm/Dockerfile.php.73
-          registry: ccr.ccs.tencentyun.com
-          repository: gzzchh/stacks
-          tags: php-fpm-74
+          push_image_and_stages: true # eg: push only if docker run succeed
+  # build-php-fpm-74:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 检出代码
+  #       uses: actions/checkout@v2
+  #     - name: 构建 PHP-FPM-74 镜像
+  #       uses: docker/build-push-action@v1
+  #       with:
+  #         username: ${{ secrets.TKE_USERNAME }}
+  #         password: ${{ secrets.TKE_PASSWORD }}
+  #         path: ./php-fpm
+  #         dockerfile: ./php-fpm/Dockerfile.php.73
+  #         registry: ccr.ccs.tencentyun.com
+  #         repository: gzzchh/stacks
+  #         tags: php-fpm-74
