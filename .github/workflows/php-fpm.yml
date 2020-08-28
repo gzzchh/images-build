@@ -21,7 +21,7 @@ jobs:
           image_name: gzzchh/stacks
           image_tag: php-fpm-73
           context: ./php-fpm
-          dockerfile: ./php-fpm/Dockerfile.php.73
+          dockerfile: Dockerfile.php.73
           push_image_and_stages: true # eg: push only if docker run succeed
   # build-php-fpm-74:
   #   runs-on: ubuntu-latest
