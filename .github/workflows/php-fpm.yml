@@ -49,6 +49,6 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
-        run: bash ./tools.sh
+        run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 3 --auth auth.json --images ./php-fpm/pter.yml
+        run: ./image-syncer -r 3 --auth ./sync-tool/auth.json --images ./php-fpm/pter.yml
