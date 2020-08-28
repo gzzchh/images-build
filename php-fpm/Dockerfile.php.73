@@ -2,8 +2,8 @@ FROM php:7.3-fpm AS builder
 
 # COPY pip.conf /root/.pip/pip.conf
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
-RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
-    sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
+# RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
+#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
 RUN cat /etc/apt/sources.list && \
     DEBIAN_FRONTEND=noninteractive && \
     # 安装组件
@@ -55,8 +55,8 @@ RUN cat /etc/apt/sources.list && \
 
 # 只安装需要的东西
 FROM php:7.3-fpm AS run
-RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
-    sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
+# RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
+#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
 RUN cat /etc/apt/sources.list && \
     DEBIAN_FRONTEND=noninteractive && \
     # 安装组件
