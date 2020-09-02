@@ -59,4 +59,4 @@ jobs:
       - name: 准备同步工具
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 3 --auth ./sync-tool/auth.json --images ./php-fpm/pter.yml
+        run: ./image-syncer -r 3 --auth ./sync-tool/auth.json --images ./php-fpm/php-fpm.yml
