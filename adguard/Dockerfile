@@ -1,6 +1,6 @@
 FROM alpine
 RUN apk update && \
-    apk add wget unzip tar gzip
+    apk add wget curl unzip tar gzip ca-certificates
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz && \
     tar xvzf  AdGuardHome_linux_amd64.tar.gz
 # 第二阶段,只有二进制文件
