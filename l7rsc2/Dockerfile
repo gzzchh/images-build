@@ -6,21 +6,21 @@ RUN curl https://api.github.com/repos/fatedier/frp/releases/latest \
     | grep browser_download_url \
     | grep _linux_amd64.tar.gz \
     | cut -d '"' -f 4 \
-    | wget -i
+    | wget -i -
 RUN tar xvzf frp_*_linux_amd64.tar.gz --strip-components=1
 # 下载和解压 nps
 RUN curl https://api.github.com/repos/ehang-io/nps/releases/latest \
     | grep browser_download_url \
     | grep linux_amd64_server.tar.gz \
     | cut -d '"' -f 4 \
-    | wget -i
+    | wget -i -
 RUN tar xvzf linux_amd64_server.tar.gz
 # 下载和解压 npc
 RUN curl https://api.github.com/repos/ehang-io/nps/releases/latest \
     | grep browser_download_url \
     | grep linux_amd64_client.tar.gz \
     | cut -d '"' -f 4 \
-    | wget -i
+    | wget -i -
 RUN tar xvzf linux_amd64_client.tar.gz
 # 提取二进制
 RUN mkdir frp-bin && \
