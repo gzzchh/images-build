@@ -5,5 +5,5 @@ RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.
     tar xvzf  AdGuardHome_linux_amd64.tar.gz
 # 第二阶段,只有二进制文件
 FROM alpine
-COPY --from=0 /root/AdGuardHome /AdGuardHome
+COPY --from=0 /AdGuardHome/AdGuardHome /AdGuardHome
 ENTRYPOINT [ "/AdGuardHome" ]
