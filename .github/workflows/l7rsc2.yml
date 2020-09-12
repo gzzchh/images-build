@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "l7rsc2/**"
+  schedule:
+    - cron: "0 4 * * *"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
