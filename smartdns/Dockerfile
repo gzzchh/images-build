@@ -1,6 +1,6 @@
 FROM alpine
 RUN apk update && \
-    apk add wget unzip tar gzip ca-certificates -y
+    apk add wget unzip tar gzip ca-certificates
 RUN  curl  https://api.github.com/repos/pymumu/smartdns/releases/latest \
     | grep browser_download_url \
     | grep smartdns-x86_64 \
