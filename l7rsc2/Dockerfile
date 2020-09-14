@@ -28,6 +28,7 @@ RUN mkdir frp-bin && \
     mv frps ./frp-bin/
 RUN mkdir nps-bin && \
     mv nps ./nps-bin/ && \
+    mv web ./nps-bin/ && \
     mv npc ./nps-bin/
 
 # 第二阶段,只有二进制文件
