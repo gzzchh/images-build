@@ -34,7 +34,7 @@ RUN mkdir nps-bin && \
 
 # 第二阶段,只有二进制文件
 FROM alpine
-COPY --from=0 /frp-bin/* /
-COPY --from=0 /nps-bin/* /
+COPY --from=0 /frp-bin/ /
+COPY --from=0 /nps-bin/ /
 RUN ls /
 CMD [ "echo", "请覆盖CMD并且选择命令,frps,frpc,nps,npc" ]
