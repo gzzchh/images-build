@@ -36,5 +36,5 @@ RUN mkdir nps-bin && \
 FROM alpine
 COPY --from=0 /frp-bin/ /
 COPY --from=0 /nps-bin/ /
-RUN ls /
+# RUN ls /
 CMD [ "echo", "请覆盖CMD并且选择命令,frps,frpc,nps,npc" ]
