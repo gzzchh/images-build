@@ -31,7 +31,7 @@ RUN set -x && \
     htop \
     lib32stdc++6 \
     mono-runtime \
-    mono-reference-assemblies-2.0 \
+    mono-devel \
     libc6 \
     libgl1-mesa-glx \
     libxcursor1 \
