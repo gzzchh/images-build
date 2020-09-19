@@ -1,10 +1,10 @@
-name: 构建 adguard 镜像
+name: 构建 mordhau 镜像
 
 # 触发条件：在 push 到 master 分支后
 on:
   push:
     paths:
-      - "adguard/**"
+      - "pterodactyl/steam/mordhau/**"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
@@ -16,30 +16,30 @@ env:
 
 # 任务
 jobs:
-  build-adguard:
+  build-mordhau:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
-      - name: 构建 adguard 镜像
+      - name: 构建 mordhau 镜像
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.HUB_USERNAME }}
           password: ${{ secrets.HUB_PASSWORD }}
-          path: ./adguard
-          dockerfile: ./adguard/Dockerfile
+          path: ./pterodactyl/steam/mordhau
+          dockerfile: ./pterodactyl/steam/mordhau/Dockerfile
           registry: docker.io
-          repository: gzzchh/stacks
-          tags: adguard
+          repository: gzzchh/pter-steam
+          tags: mordhau
 
   sync-back:
     runs-on: ubuntu-latest
     needs:
-      - build-adguard
+      - build-mordhau
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./adguard/sync.yml
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/mordhau/sync.yml
