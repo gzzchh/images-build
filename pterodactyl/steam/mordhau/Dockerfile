@@ -19,7 +19,7 @@ RUN set -x && \
     libfontconfig1 \
     libpangocairo-1.0-0 \
     libnss3 \
-    libgconf2-4 \
+    libgconf-2-4 \
     libxi6 \
     libxcursor1 \
     libxss1 \

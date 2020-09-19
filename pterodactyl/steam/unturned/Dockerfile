@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN set -x && \
     # 安装基本组件
     dpkg --add-architecture i386 && \
-    apt update \
+    apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
     curl \
     wget \
