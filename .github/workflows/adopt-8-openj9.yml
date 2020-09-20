@@ -43,4 +43,4 @@ jobs:
       - name: 准备同步工具
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/base/adopt-8-openj9/adopt-8-openj9.yml
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/base/java/adopt-8-openj9.yml
