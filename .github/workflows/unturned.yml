@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "pterodactyl/steam/unturned/**"
+      - ".github/workflows/unturned.yml"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}

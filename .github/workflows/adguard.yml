@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "adguard/**"
+      - ".github/workflows/adguard.yml"
   schedule:
     # UTC 每周三 早上 4:30
     # UTC+8 每周三 中午 12:20

@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "pterodactyl/steam/mordhau/**"
+      - ".github/workflows/mordhau.yml"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}

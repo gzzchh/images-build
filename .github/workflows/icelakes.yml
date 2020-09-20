@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "pterodactyl/steam/icelakes/**"
+      - ".github/workflows/icelakes.yml"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}

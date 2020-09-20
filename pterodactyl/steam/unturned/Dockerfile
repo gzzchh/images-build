@@ -27,8 +27,6 @@ RUN set -x && \
     libstdc++6:i386 && \
     # 游戏 Unturned 特定组件
     apt install -y --no-install-recommends --no-install-suggests \
-    screen \
-    htop \
     lib32stdc++6 \
     mono-runtime \
     mono-devel \
@@ -37,7 +35,7 @@ RUN set -x && \
     libxcursor1 \
     libxrandr2 \
     libc6-dev \
-    libgcc-4.8-dev && \
+    libgcc-10-dev && \
     # 清理
     apt autoremove -y && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
