@@ -43,4 +43,4 @@ jobs:
       - name: 准备同步工具
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/unturned/sync.yml
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/unturned/unturned.yml

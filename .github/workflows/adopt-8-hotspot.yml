@@ -1,11 +1,11 @@
-name: 构建 ark-survival-evolved 镜像
+name: 构建 adopt-8-hotspot 镜像
 
-# 触发条件：在 push 到 master 分支后
 on:
   push:
     paths:
-      - "pterodactyl/steam/ark-survival-evolved/**"
-      - ".github/workflows/ark-survival-evolved.yml"
+      - "pterodactyl/base/java/Dockerfile-adopt-8-hotspot"
+      - "pterodactyl/base/java/entrypoint.sh"
+      - ".github/workflows/adopt-8-hotspot.yml"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
@@ -17,30 +17,30 @@ env:
 
 # 任务
 jobs:
-  build-ark-survival-evolved:
+  build-adopt-8-hotspot:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
-      - name: 构建 ark-survival-evolved 镜像
+      - name: 构建 adopt-8-hotspot 镜像
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.HUB_USERNAME }}
           password: ${{ secrets.HUB_PASSWORD }}
-          path: ./pterodactyl/steam/ark-survival-evolved
-          dockerfile: ./pterodactyl/steam/ark-survival-evolved/Dockerfile
+          path: ./pterodactyl/base/java
+          dockerfile: ./pterodactyl/base/java/Dockerfile-adopt-8-hotspot
           registry: docker.io
-          repository: gzzchh/pter-steam
-          tags: ark-survival-evolved
+          repository: gzzchh/pter-base
+          tags: adopt-8-hotspot
 
   sync-back:
     runs-on: ubuntu-latest
     needs:
-      - build-ark-survival-evolved
+      - build-adopt-8-hotspot
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/ark-survival-evolved/ark-survival-evolved.yml
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/base/adopt-8-hotspot/adopt-8-hotspot.yml
