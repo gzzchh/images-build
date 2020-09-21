@@ -3,9 +3,7 @@ name: 定时搬回国内
 # 触发条件：在 push 到 master 分支后
 on:
   schedule:
-    # UTC 四小时一次
-    # UTC+8 四小时一次
-    - cron: "* */4 * * *"
+    - cron: "20 12 */3 * *"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
@@ -17,7 +15,88 @@ env:
 
 # 任务
 jobs:
-  sync-back:
+  sync-adguard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./adguard/adguard.yml
+
+  sync-dnsmasq:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./dnsmasq/dnsmasq.yml
+
+  sync-l7rsc2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./l7rsc2/l7rsc2.yml
+
+  sync-php-fpm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./php-fpm/php-fpm.yml
+
+  sync-smartdns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./smartdns/smartdns.yml
+
+  # 下面是 P73R0d4c7YL-steam 部分
+  sync-ark-survival-evolved:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/ark-survival-evolved/ark-survival-evolved.yml
+
+  sync-icelakes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/icelakes/icelakes.yml
+
+  sync-mordhau:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/mordhau/mordhau.yml
+
+  sync-unturned:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
@@ -26,3 +105,5 @@ jobs:
         run: bash ./sync-tool/tools.sh
       - name: 搬回国内
         run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./pterodactyl/steam/unturned/unturned.yml
+
+  # 下面是 P73R0d4c7YL-base 部分
