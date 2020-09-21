@@ -6,7 +6,8 @@ on:
       - "pterodactyl/base/java/Dockerfile-adopt-11-hotspot"
       - "pterodactyl/base/java/entrypoint.sh"
       - ".github/workflows/adopt-11-hotspot.yml"
-
+  schedule:
+    - cron: "30 4 * * 3"
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
   TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}

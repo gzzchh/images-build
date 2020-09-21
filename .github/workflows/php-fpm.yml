@@ -7,9 +7,7 @@ on:
       - "php-fpm/**"
       - ".github/workflows/php-fpm.yml"
   schedule:
-    # UTC 每周三 早上 4:30
-    # UTC+8 每周三 中午 12:20
-    - cron: "30 4 * * 2"
+    - cron: "25 7 * * 5"
 
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}

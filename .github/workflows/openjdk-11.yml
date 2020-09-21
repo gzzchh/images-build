@@ -6,7 +6,8 @@ on:
       - "pterodactyl/base/java/Dockerfile-openjdk-11"
       - "pterodactyl/base/java/entrypoint.sh"
       - ".github/workflows/openjdk-11.yml"
-
+  schedule:
+    - cron: "30 4 * * 3"
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
   TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}

@@ -1,0 +1,30 @@
+name: 定时搬回国内
+
+# 触发条件：在 push 到 master 分支后
+on:
+  schedule:
+    - cron: "20 12 */3 * *"
+
+env:
+  TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
+  TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}
+  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+  HUB_USERNAME: ${{ secrets.HUB_USERNAME }}
+  HUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
+
+# 任务
+jobs:
+  {% for item in navigation %}
+  sync-adguard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 准备同步工具
+        run: bash ./sync-tool/tools.sh
+      - name: 搬回国内
+        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./adguard/adguard.yml
+   {% endfor %}
+
+   
