@@ -6,6 +6,7 @@ RUN curl https://api.github.com/repos/pymumu/smartdns/releases/latest \
     | grep smartdns-x86_64 \
     | cut -d '"' -f 4 \
     | wget -i -
+RUN chmod +x smartdns-x86_64
 # 第二阶段,只有二进制文件
 FROM alpine
 RUN apk update && \
