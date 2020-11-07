@@ -12,4 +12,4 @@ FROM alpine
 RUN apk update && \
     apk add ca-certificates
 COPY --from=0 /wings_linux_amd64 /wings
-ENTRYPOINT [ "/wings" ]
+CMD [ "/wings" ]
