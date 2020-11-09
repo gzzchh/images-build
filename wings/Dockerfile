@@ -7,11 +7,11 @@ RUN curl https://api.github.com/repos/pterodactyl/wings/releases/latest \
     | wget -i - -O tarball.tar.gz
 RUN mkdir wings
 RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
-RUN cd wings && \
+RUN cd wings \
     && CGO_ENABLED=0 go build -ldflags="-s -w" -o wings \
     && upx --brute wings \
-    chmod +x wings \
-    cp wings /wings
+    && chmod +x wings \
+    && cp wings /wings
 # 第二阶段,只有二进制文件
 FROM alpine
 # 最后修复了库问题
