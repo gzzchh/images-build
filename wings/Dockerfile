@@ -2,9 +2,9 @@ FROM golang:alpine
 RUN apk update && \
     apk add wget curl unzip tar gzip ca-certificates busybox upx
 RUN curl https://api.github.com/repos/pterodactyl/wings/releases/latest \
-    grep tarball_url \
-    cut -d '"' -f 4 \
-    wget -i - -O tarball.tar.gz
+    | grep tarball_url \
+    | cut -d '"' -f 4 \
+    | wget -i - -O tarball.tar.gz
 RUN mkdir wings
 RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
 RUN cd wings && \
