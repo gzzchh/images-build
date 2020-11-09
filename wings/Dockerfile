@@ -1,18 +1,22 @@
-FROM alpine
+FROM golang:alpine
 RUN apk update && \
-    apk add wget curl unzip tar gzip ca-certificates
+    apk add wget curl unzip tar gzip ca-certificates busybox upx
 RUN curl https://api.github.com/repos/pterodactyl/wings/releases/latest \
-    | grep browser_download_url \
-    | grep wings_linux_amd64 \
-    | cut -d '"' -f 4 \
-    | wget -i -
-RUN chmod +x wings_linux_amd64
+    grep tarball_url \
+    cut -d '"' -f 4 \
+    wget -i - -O tarball.tar.gz
+RUN mkdir wings
+RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
+RUN cd wings && \
+    && CGO_ENABLED=0 go build -ldflags="-s -w" -o wings \
+    && upx --brute wings \
+    chmod +x wings \
+    cp wings /wings
 # 第二阶段,只有二进制文件
 FROM alpine
 # 最后修复了库问题
 # 直到翼龙关闭CGO编译
 RUN apk update && \
-    apk add ca-certificates \
-    mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
-COPY --from=0 /wings_linux_amd64 /wings
+    apk add ca-certificates
+COPY --from=0 /wings /wings
 CMD [ "/wings" ]
