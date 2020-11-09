@@ -36,7 +36,7 @@ jobs:
           file: ./adguard/Dockerfile
           push: true
           registry: docker.io
-          repository: gzzchh/stacks:adguard
+          tags: gzzchh/stacks:adguard
 
   sync-back:
     runs-on: ubuntu-latest
