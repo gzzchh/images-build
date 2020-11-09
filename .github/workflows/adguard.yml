@@ -37,7 +37,6 @@ jobs:
           context: ./adguard
           file: ./adguard/Dockerfile
           push: true
-          registry: docker.io
           tags: gzzchh/stacks:adguard
 
   sync-back:
