@@ -1,40 +1,38 @@
-name: 构建 wings 镜像
-
-# 触发条件：在 push 到 master 分支后
+name: "构建 wings 镜像"
 on:
   push:
     paths:
       - "wings/**"
-      - ".github/workflows/wings.yml"
+      - .github/workflows/wings.yml
   schedule:
     - cron: "25 7 * * 5"
-
 env:
-  TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
-  TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}
-  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
-  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
-  HUB_USERNAME: ${{ secrets.HUB_USERNAME }}
-  HUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
-
-# 任务
+  TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
+  TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"
+  ACR_USERNAME: "${{ secrets.ACR_USERNAME }}"
+  ACR_PASSWORD: "${{ secrets.ACR_PASSWORD }}"
+  HUB_USERNAME: "${{ secrets.HUB_USERNAME }}"
+  HUB_PASSWORD: "${{ secrets.HUB_PASSWORD }}"
 jobs:
   build-wings:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
-      - name: 构建 wings 镜像
-        uses: docker/build-push-action@v1
+      - name: "登陆到 DockerHub"
+        uses: docker/login-action@v1
         with:
-          username: ${{ secrets.HUB_USERNAME }}
-          password: ${{ secrets.HUB_PASSWORD }}
-          path: ./wings
-          dockerfile: ./wings/Dockerfile
-          registry: docker.io
-          repository: gzzchh/stacks
-          tags: wings
-
+          username: "${{ secrets.HUB_USERNAME }}"
+          password: "${{ secrets.HUB_PASSWORD }}"
+      - name: "设定 Docker Buildx"
+        uses: docker/setup-buildx-action@v1
+      - name: "构建 wings 镜像"
+        uses: docker/build-push-action@v2
+        with:
+          tags: "gzzchh/stacks:wings"
+          contex: ./wings
+          file: ./wings/Dockerfile
+          push: true
   sync-back:
     runs-on: ubuntu-latest
     needs:
@@ -43,6 +41,6 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
-        run: bash ./sync-tool/tools.sh
+        run: "bash ./sync-tool/tools.sh"
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./wings/wings.yml
+        run: "./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./wings/wings.yml"
