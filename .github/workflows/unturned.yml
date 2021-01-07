@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-steam:unturned"
-          contex: ./pterodactyl/steam/unturned
+          context: ./pterodactyl/steam/unturned
           file: ./pterodactyl/steam/unturned/Dockerfile
           push: true
   sync-back:

@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-base:zulu-8"
-          contex: ./pterodactyl/base/java
+          context: ./pterodactyl/base/java
           file: ./pterodactyl/base/java/Dockerfile-zulu-8
           push: true
   sync-back:

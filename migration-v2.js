@@ -32,8 +32,8 @@ function convertV1ToV2(data) {
           delete stepParameters.username;
           delete stepParameters.password;
           delete stepParameters.registry;
-          // path 改为 contex
-          stepParameters.contex = stepParameters.path;
+          // path 改为 context
+          stepParameters.context = stepParameters.path;
           delete stepParameters.path;
           // dockerfile 改为 file
           stepParameters.file = stepParameters.dockerfile;

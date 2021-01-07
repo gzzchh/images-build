@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-steam:ark-survival-evolved"
-          contex: ./pterodactyl/steam/ark-survival-evolved
+          context: ./pterodactyl/steam/ark-survival-evolved
           file: ./pterodactyl/steam/ark-survival-evolved/Dockerfile
           push: true
   sync-back:

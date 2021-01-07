@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-steam:mordhau"
-          contex: ./pterodactyl/steam/mordhau
+          context: ./pterodactyl/steam/mordhau
           file: ./pterodactyl/steam/mordhau/Dockerfile
           push: true
   sync-back:

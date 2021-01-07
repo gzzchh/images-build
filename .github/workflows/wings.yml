@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/stacks:wings"
-          contex: ./wings
+          context: ./wings
           file: ./wings/Dockerfile
           push: true
   sync-back:

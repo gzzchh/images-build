@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/stacks:dnsmasq"
-          contex: ./dnsmasq
+          context: ./dnsmasq
           file: ./dnsmasq/Dockerfile
           push: true
   sync-back:

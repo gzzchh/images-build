@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-steam:icelakes"
-          contex: ./pterodactyl/steam/icelakes
+          context: ./pterodactyl/steam/icelakes
           file: ./pterodactyl/steam/icelakes/Dockerfile
           push: true
   sync-back:

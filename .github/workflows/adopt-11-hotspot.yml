@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-base:adopt-11-hotspot"
-          contex: ./pterodactyl/base/java
+          context: ./pterodactyl/base/java
           file: ./pterodactyl/base/java/Dockerfile-adopt-11-hotspot
           push: true
   sync-back:

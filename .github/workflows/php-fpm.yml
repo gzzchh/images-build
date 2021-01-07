@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/stacks:php-fpm-73"
-          contex: ./php-fpm
+          context: ./php-fpm
           file: ./php-fpm/Dockerfile.php.73
           push: true
   build-php-fpm-74:
@@ -49,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/stacks:php-fpm-74"
-          contex: ./php-fpm
+          context: ./php-fpm
           file: ./php-fpm/Dockerfile.php.74
           push: true
   sync-back:

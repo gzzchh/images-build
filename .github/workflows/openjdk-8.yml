@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/pter-base:openjdk-8"
-          contex: ./pterodactyl/base/java
+          context: ./pterodactyl/base/java
           file: ./pterodactyl/base/java/Dockerfile-openjdk-8
           push: true
   sync-back:

@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: "gzzchh/stacks:smartdns"
-          contex: ./smartdns
+          context: ./smartdns
           file: ./smartdns/Dockerfile
           push: true
   sync-back:
