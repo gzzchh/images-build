@@ -1,5 +1,7 @@
 FROM alpine
 # 第一步 下载
+RUN apk update && \
+    apk add wget curl unzip tar gzip ca-certificates
 RUN curl https://api.github.com/repos/Tencent/TencentKona-8/releases/latest \
     | grep browser_download_url \
     | grep linux \
