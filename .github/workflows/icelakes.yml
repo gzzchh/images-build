@@ -5,7 +5,7 @@ on:
       - "pterodactyl/steam/icelakes/**"
       - .github/workflows/icelakes.yml
   schedule:
-    - cron: "45 6 5 * *"
+    - cron: "0 8 5,15,25 * *"
 env:
   TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
   TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"
