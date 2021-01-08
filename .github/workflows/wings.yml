@@ -5,7 +5,7 @@ on:
       - "wings/**"
       - .github/workflows/wings.yml
   schedule:
-    - cron: "25 7 * * 5"
+    - cron: "0 7 * * 1"
 env:
   TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
   TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"

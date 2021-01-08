@@ -1,38 +1,34 @@
-name: 构建 cn-jdk-drawonwell-8  镜像
-
+name: "构建 cn-jdk-drawonwell-8  镜像"
 on:
   push:
     paths:
-      - "cn-jdk/Dockerfile-cn-jdk-drawonwell-8"
-      - ".github/workflows/cn-jdk-drawonwell-8.yml"
+      - cn-jdk/Dockerfile-cn-jdk-drawonwell-8
+      - .github/workflows/cn-jdk-drawonwell-8.yml
   schedule:
     - cron: "30 4 * * 3"
 env:
-  TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
-  TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}
-  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
-  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
-  HUB_USERNAME: ${{ secrets.HUB_USERNAME }}
-  HUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
-
-# 任务
+  TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
+  TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"
+  ACR_USERNAME: "${{ secrets.ACR_USERNAME }}"
+  ACR_PASSWORD: "${{ secrets.ACR_PASSWORD }}"
+  HUB_USERNAME: "${{ secrets.HUB_USERNAME }}"
+  HUB_PASSWORD: "${{ secrets.HUB_PASSWORD }}"
 jobs:
   build-cn-jdk-drawonwell-8:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
-      - name: 构建 cn-jdk-drawonwell-8 镜像
-        uses: docker/build-push-action@v1
+      - name: "构建 cn-jdk-drawonwell-8 镜像"
+        uses: docker/build-push-action@v2
         with:
-          username: ${{ secrets.HUB_USERNAME }}
-          password: ${{ secrets.HUB_PASSWORD }}
+          username: "${{ secrets.HUB_USERNAME }}"
+          password: "${{ secrets.HUB_PASSWORD }}"
           path: ./cn-jdk
           dockerfile: ./cn-jdk/Dockerfile-drawonwell-8
           registry: docker.io
           repository: gzzchh/stacks
           tags: drawonwell-8
-
   sync-back:
     runs-on: ubuntu-latest
     needs:
@@ -41,6 +37,6 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
-        run: bash ./sync-tool/tools.sh
+        run: "bash ./sync-tool/tools.sh"
       - name: 搬回国内
-        run: ./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./cn-jdk/drawonwell-8.yml
+        run: "./image-syncer -r 5 --auth ./sync-tool/auth.json --images ./cn-jdk/drawonwell-8.yml"
