@@ -1,4 +1,4 @@
-name: "构建 cn-jdk-kona-8  镜像"
+name: "构建 cn-jdk-kona-8 镜像"
 on:
   push:
     paths:
