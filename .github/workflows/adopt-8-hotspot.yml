@@ -7,7 +7,7 @@ on:
       - "pterodactyl/base/java/entrypoint.sh"
       - ".github/workflows/adopt-8-hotspot.yml"
   schedule:
-    - cron: "30 4 * * 3"
+    - cron: "0 14 * * 1"
 env:
   TKE_USERNAME: ${{ secrets.TKE_USERNAME }}
   TKE_PASSWORD: ${{ secrets.TKE_PASSWORD }}
