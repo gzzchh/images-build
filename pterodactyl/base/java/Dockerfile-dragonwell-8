@@ -3,7 +3,7 @@
 # Environment: AliDragonwell-8
 # Minimum Panel Version: 0.6.0
 # ----------------------------------
-FROM gzzchh/stacks:drawonwell-8
+FROM gzzchh/stacks:dragonwell-8
 
 RUN apk --no-cache update && \
     apk --no-cache add bash curl wget && \
