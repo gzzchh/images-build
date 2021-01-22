@@ -30,7 +30,7 @@ RUN chmod +x v2ray v2ctl
 # 第二阶段,只有二进制文件
 # 尝试使用 Scratch 缩小大小
 FROM scratch
-COPY --from=builder /v2ray /v2ctl /geoip.dat /geosite /
+COPY --from=builder /v2ray /v2ctl /geoip.dat /geosite.dat /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 CMD [ "-config" ,"/etc/v2ray/config.json"] 
 ENTRYPOINT [ "/v2ray" ]
