@@ -1,0 +1,3 @@
+FROM fedora
+# 安装基础工具
+COPY scripts 
