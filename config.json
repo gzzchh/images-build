@@ -1,0 +1,14 @@
+{
+    "paths": {
+        "stacks": {
+            "task-name-prefix": "build-stacks-",
+            "file-name-prefix": "stacks-",
+            "workflow-name-prefix": "stacks-"
+        },
+        "pter/base/java": {
+            "task-name-prefix": "build-stacks-",
+            "file-name-prefix": "stacks-",
+            "workflow-name-prefix": "stacks-"
+        }
+    }
+}
