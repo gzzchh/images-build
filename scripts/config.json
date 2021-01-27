@@ -8,7 +8,16 @@
     "pter/base/java": {
       "registry": "gzzchh/pter-base",
       "cron": "",
-      "extraScanFiles": ["entrypoint.sh"]
+      "extraScanFiles": [
+        "entrypoint.sh"
+      ]
+    },
+    "pter/steam": {
+      "registry": "gzzchh/pter-steam",
+      "cron": "",
+      "extraScanFiles": [
+        "entrypoint.sh"
+      ]
     }
   }
 }

@@ -3,7 +3,6 @@ const klawSync = require("klaw-sync");
 const path = require("path");
 const workflowData = require("./workflow");
 const YAML = require("yamljs");
-const prettier = require("prettier");
 
 function genWorkflowMain(workflowConfig) {
 	let workflowMain = Object.assign({}, workflowData.workflowMain);
@@ -79,8 +78,7 @@ for (scanPath in configJson.paths) {
 				// 如果名字刚好等于 Dockerfile
 				// 那就用文件夹的名字作为 tag
 				tag = path.dirname(filePath.path).split(path.sep).pop();
-				// 同时应该使用上一级来作为
-				context = `${scanPath}`;
+				// 同时应该使用上一级相对路径来作为 context
 			} else {
 				// 那就用后面的部分作为 tag
 				tag = filename.replace("Dockerfile-", "");
@@ -90,6 +88,7 @@ for (scanPath in configJson.paths) {
 			let regExp = new RegExp(path.sep, "g");
 			let taskId = scanPath.replace(regExp, "-");
 			// 计算一些其他数据
+			context = path.dirname(filePath.path).replace(process.cwd() + "/", "");
 			let pushTarget = `${registry}:${tag}`;
 			let dockerfilePath = `${context + path.sep + filename}`;
 			let workflowName = `构建 ${taskId}-${tag} 镜像`;

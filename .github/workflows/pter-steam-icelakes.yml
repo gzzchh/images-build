@@ -1,9 +1,10 @@
-name: '构建 stacks-php-fpm-74 镜像'
+name: '构建 pter-steam-icelakes 镜像'
 on:
     push:
         paths:
-            - stacks/php-fpm/Dockerfile-php-fpm-74
-            - .github/workflows/stacks-php-fpm-74.yml
+            - pter/steam/icelakes/Dockerfile
+            - .github/workflows/pter-steam-icelakes.yml
+            - pter/steam/icelakes/entrypoint.sh
     schedule:
         -
             cron: '0 14 * * 1'
@@ -15,7 +16,7 @@ env:
     HUB_USERNAME: '${{ secrets.HUB_USERNAME }}'
     HUB_PASSWORD: '${{ secrets.HUB_PASSWORD }}'
 jobs:
-    build-stacks-php-fpm-74:
+    build-pter-steam-icelakes:
         runs-on: ubuntu-latest
         steps:
             -
@@ -34,14 +35,14 @@ jobs:
                 name: '构建 adopt-8-hotspot 镜像'
                 uses: docker/build-push-action@v2
                 with:
-                    context: stacks/php-fpm
-                    file: stacks/php-fpm/Dockerfile-php-fpm-74
+                    context: pter/steam/icelakes
+                    file: pter/steam/icelakes/Dockerfile
                     push: true
-                    tags: 'gzzchh/stacks:php-fpm-74'
+                    tags: 'gzzchh/pter-steam:icelakes'
     sync-back:
         runs-on: ubuntu-latest
         needs:
-            - build-stacks-php-fpm-74
+            - build-pter-steam-icelakes
         steps:
             -
                 name: 检出代码
@@ -51,4 +52,4 @@ jobs:
                 run: 'bash ./sync-tool/tools.sh'
             -
                 name: 搬回国内
-                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images stacks/php-fpm/php-fpm-74.yml'
+                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images pter/steam/icelakes/icelakes.yml'

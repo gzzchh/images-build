@@ -2,7 +2,7 @@ name: '构建 stacks-v2ray 镜像'
 on:
     push:
         paths:
-            - stacks/Dockerfile
+            - stacks/v2ray/Dockerfile
             - .github/workflows/stacks-v2ray.yml
     schedule:
         -
@@ -34,8 +34,8 @@ jobs:
                 name: '构建 adopt-8-hotspot 镜像'
                 uses: docker/build-push-action@v2
                 with:
-                    context: stacks
-                    file: stacks/Dockerfile
+                    context: stacks/v2ray
+                    file: stacks/v2ray/Dockerfile
                     push: true
                     tags: 'gzzchh/stacks:v2ray'
     sync-back:
@@ -51,4 +51,4 @@ jobs:
                 run: 'bash ./sync-tool/tools.sh'
             -
                 name: 搬回国内
-                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images stacks/v2ray.yml'
+                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images stacks/v2ray/v2ray.yml'
