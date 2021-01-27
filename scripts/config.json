@@ -1,0 +1,14 @@
+{
+  "paths": {
+    "stacks": {
+      "registry": "gzzchh/stacks",
+      "cron": "",
+      "extraScanFiles": []
+    },
+    "pter/base/java": {
+      "registry": "gzzchh/pter-base",
+      "cron": "",
+      "extraScanFiles": ["entrypoint.sh"]
+    }
+  }
+}

@@ -1,9 +1,9 @@
-name: '构建 stacks-adguard 镜像'
+name: '构建 stacks-php-fpm-73 镜像'
 on:
     push:
         paths:
-            - stacks/Dockerfile
-            - .github/workflows/stacks-adguard.yml
+            - stacks/Dockerfile-php-fpm-73
+            - .github/workflows/stacks-php-fpm-73.yml
     schedule:
         -
             cron: '0 14 * * 1'
@@ -15,7 +15,7 @@ env:
     HUB_USERNAME: '${{ secrets.HUB_USERNAME }}'
     HUB_PASSWORD: '${{ secrets.HUB_PASSWORD }}'
 jobs:
-    build-stacks-adguard:
+    build-stacks-php-fpm-73:
         runs-on: ubuntu-latest
         steps:
             -
@@ -35,13 +35,13 @@ jobs:
                 uses: docker/build-push-action@v2
                 with:
                     context: stacks
-                    file: stacks/Dockerfile
+                    file: stacks/Dockerfile-php-fpm-73
                     push: true
-                    tags: 'gzzchh/stacks:adguard'
+                    tags: 'gzzchh/stacks:php-fpm-73'
     sync-back:
         runs-on: ubuntu-latest
         needs:
-            - build-stacks-adguard
+            - build-stacks-php-fpm-73
         steps:
             -
                 name: 检出代码
@@ -51,4 +51,4 @@ jobs:
                 run: 'bash ./sync-tool/tools.sh'
             -
                 name: 搬回国内
-                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images stacks/adguard.yml'
+                run: './image-syncer -r 5 --auth ./sync-tool/auth.json --images stacks/php-fpm-73.yml'
