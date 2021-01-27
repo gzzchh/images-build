@@ -6,7 +6,7 @@ on:
       - .github/workflows/pter-steam-mordhau.yml
       - pter/steam/mordhau/entrypoint.sh
   schedule:
-    - cron: "0 14 * * 1"
+    - cron: "45 6 5 * *"
 env:
   TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
   TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"

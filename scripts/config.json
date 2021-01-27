@@ -2,22 +2,30 @@
   "paths": {
     "stacks": {
       "registry": "gzzchh/stacks",
-      "cron": "",
+      "schedule": [
+        {
+          "cron": "25 7 * * 5"
+        }
+      ],
       "extraScanFiles": []
     },
     "pter/base/java": {
       "registry": "gzzchh/pter-base",
-      "cron": "",
-      "extraScanFiles": [
-        "entrypoint.sh"
-      ]
+      "schedule": [
+        {
+          "cron": "30 4 * * 3"
+        }
+      ],
+      "extraScanFiles": ["entrypoint.sh"]
     },
     "pter/steam": {
       "registry": "gzzchh/pter-steam",
-      "cron": "",
-      "extraScanFiles": [
-        "entrypoint.sh"
-      ]
+      "schedule": [
+        {
+          "cron": "45 6 5 * *"
+        }
+      ],
+      "extraScanFiles": ["entrypoint.sh"]
     }
   }
 }
