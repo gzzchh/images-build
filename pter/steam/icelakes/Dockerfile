@@ -7,9 +7,7 @@ FROM ubuntu:latest
 
 # apt
 ENV DEBIAN_FRONTEND=noninteractive
-RUN set -x && \
-    # 安装基本组件
-    dpkg --add-architecture i386 && \
+RUN dpkg --add-architecture i386 && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
     curl \
@@ -22,9 +20,8 @@ RUN set -x && \
     ca-certificates \
     bc \
     jq \
-    lib32gcc1 \
-    libstdc++6 \
-    libstdc++6:i386 && \
+    libc6 \
+    libstdc++6 && \
     # 游戏 Ice Lakes 特定组件
     # 清理
     apt autoremove -y && \

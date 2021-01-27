@@ -7,30 +7,7 @@ FROM ubuntu:latest
 
 # apt
 ENV DEBIAN_FRONTEND=noninteractive
-RUN set -x && \
-    apt update && \
-    # Install Mordhau server dependencies and clean up
-    apt install -y --no-install-recommends --no-install-suggests \
-    language-pack-zh-hans \
-    lib32stdc++6 \
-    lib32gcc1 \
-    libc6 \
-    libc6-i386 \
-    libfontconfig1 \
-    libpangocairo-1.0-0 \
-    libnss3 \
-    libgconf-2-4 \
-    libxi6 \
-    libxcursor1 \
-    libxss1 \
-    libxcomposite1 \
-    libasound2 \
-    libxdamage1 \
-    libxtst6 \
-    libatk1.0-0 \
-    libxrandr2 && \
-    ## For SteamCMD 实验性
-    dpkg --add-architecture i386 && \
+RUN dpkg --add-architecture i386 && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
     curl \
@@ -44,10 +21,28 @@ RUN set -x && \
     bc \
     jq \
     lib32gcc1 \
-    libstdc++6 \
-    libstdc++6:i386 && \
+    libc6 \
+    libstdc++6 && \
+    # 游戏 Mordhau 特定组件
+    apt install -y --no-install-recommends --no-install-suggests \
+    libfontconfig1 \
+    libpangocairo-1.0-0 \
+    libnss3 \
+    libgconf-2-4 \
+    libxi6 \
+    libxcursor1 \
+    libxss1 \
+    libxcomposite1 \
+    libasound2 \
+    libxdamage1 \
+    libxtst6 \
+    libatk1.0-0 \
+    libxrandr2 && \
+    # 清理
     apt autoremove -y && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/
+    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
+    # 最后 添加用户
+    useradd -d /home/container -m container
 
 USER container
 ENV  USER container

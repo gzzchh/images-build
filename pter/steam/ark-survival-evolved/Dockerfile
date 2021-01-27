@@ -7,9 +7,7 @@ FROM ubuntu:latest
 
 # apt
 ENV DEBIAN_FRONTEND=noninteractive
-RUN set -x && \
-    # 安装基本组件
-    dpkg --add-architecture i386 && \
+RUN dpkg --add-architecture i386 && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
     curl \
@@ -23,8 +21,8 @@ RUN set -x && \
     bc \
     jq \
     lib32gcc1 \
-    libstdc++6 \
-    libstdc++6:i386 && \
+    libc6 \
+    libstdc++6 && \
     # 游戏 ARK Survival Evolved 特定组件
     echo "fs.file-max=500000" >> /etc/sysctl.conf && \
     echo "* soft nofile 100000" >> /etc/security/limits.conf && \
