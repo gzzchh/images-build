@@ -88,4 +88,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN addgroup --gid 1000 www && \
     adduser --disabled-password --gecos "" --uid 1000 --gid 1000 www
 COPY entrypoint.sh /entrypoint.sh
+# 修复权限
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
