@@ -2,16 +2,17 @@ FROM golang:alpine
 RUN apk update && \
     apk add wget curl unzip tar gzip ca-certificates busybox upx
 RUN curl https://api.github.com/repos/pterodactyl/wings/releases/latest \
-    | grep tarball_url \
+    | grep browser_download_url \
+    | grep wings_linux_amd64 \
     | cut -d '"' -f 4 \
-    | wget -i - -O tarball.tar.gz
-RUN mkdir wings
-RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
-RUN cd wings \
-    && CGO_ENABLED=0 go build -ldflags="-s -w" -o wings \
-    && upx --brute wings \
-    && chmod +x wings \
-    && cp wings /wings
+    | wget -i - -O wings
+# RUN mkdir wings
+# RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
+# RUN cd wings \
+#     && CGO_ENABLED=0 go build -ldflags="-s -w" -o wings \
+#     && upx --brute wings \
+#     && chmod +x wings \
+#     && cp wings /wings
 # 第二阶段,只有二进制文件
 FROM alpine
 # 最后修复了库问题
