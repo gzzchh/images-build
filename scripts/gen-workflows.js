@@ -37,6 +37,7 @@ function genBuildJob(workflowConfig) {
       step.with.context = workflowConfig.context;
       step.with.file = workflowConfig.dockerfilePath;
       step.with.tags = workflowConfig.pushTarget;
+      step.name = workflowConfig.workflowName;
     }
   });
   return buildJob;
@@ -103,6 +104,7 @@ for (scanPath in configJson.paths) {
       // console.log(`上下文路径: ${context}`);
       // console.log(`Dockerfile路径: ${dockerfilePath}`);
       // console.log(`同步配置文件路径: ${syncConfigFile}`);
+      console.log(`工作流名称: ${workflowName}`);
       let workflowConfig = {
         pushTarget: pushTarget,
         context: context,

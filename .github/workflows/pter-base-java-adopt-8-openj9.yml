@@ -27,7 +27,7 @@ jobs:
         with:
           username: "${{ secrets.HUB_USERNAME }}"
           password: "${{ secrets.HUB_PASSWORD }}"
-      - name: "构建 adopt-8-hotspot 镜像"
+      - name: "构建 pter-base-java-adopt-8-openj9 镜像"
         uses: docker/build-push-action@v2
         with:
           context: pter/base/java
