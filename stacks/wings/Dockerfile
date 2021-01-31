@@ -5,7 +5,8 @@ RUN curl https://api.github.com/repos/pterodactyl/wings/releases/latest \
     | grep browser_download_url \
     | grep wings_linux_amd64 \
     | cut -d '"' -f 4 \
-    | wget -i - -O /wings
+    | wget -i - -O /wings \
+    && chmod +x /wings
 # RUN mkdir wings
 # RUN tar xvzf tarball.tar.gz -C wings --strip-components=1
 # RUN cd wings \
