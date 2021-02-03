@@ -7,19 +7,19 @@ mkdir -p /home/www
 update-ca-certificates
 if [ -z $RUN_AS ];then
     # 空,运行php-fpm
-	echo "未指定运行模式,将运行PHP-FPM"
-    echo "提示:运行模式可选[FPM|CLI|COMPOSER]"
-    php-fpm
+        echo "未指定运行模式,将运行PHP-FPM"
+        echo "提示:运行模式可选[FPM|CLI|COMPOSER]"
+        php-fpm
 else
     case $RUN_AS in
     FPM)
             php-fpm
             ;;
     CLI)
-            php
+            php $@
             ;;
     COMPOSER)
-            composer
+            composer $@
             ;;
     *)
             echo "Usage: $name [FPM|CLI|COMPOSER]"
