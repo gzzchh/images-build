@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/base/java/Dockerfile-adopt-11-hotspot
-      - .github/workflows/pter-base-java-adopt-11-hotspot.yml
       - pter/base/java/entrypoint.sh
+      - .github/workflows/pter-base-java-adopt-11-hotspot.yml
   schedule:
     - cron: "30 4 * * 3"
 env:

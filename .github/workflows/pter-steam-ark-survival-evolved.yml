@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/steam/ark-survival-evolved/Dockerfile
-      - .github/workflows/pter-steam-ark-survival-evolved.yml
       - pter/steam/ark-survival-evolved/entrypoint.sh
+      - .github/workflows/pter-steam-ark-survival-evolved.yml
   schedule:
     - cron: "45 6 5 * *"
 env:

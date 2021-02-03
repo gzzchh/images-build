@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/base/java/Dockerfile-adopt-8-openj9
-      - .github/workflows/pter-base-java-adopt-8-openj9.yml
       - pter/base/java/entrypoint.sh
+      - .github/workflows/pter-base-java-adopt-8-openj9.yml
   schedule:
     - cron: "30 4 * * 3"
 env:

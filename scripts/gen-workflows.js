@@ -12,6 +12,7 @@ function genWorkflowMain(workflowConfig) {
   // 添加对文件的关注
   workflowMain.on.push.paths = [
     workflowConfig.dockerfilePath,
+    workflowConfig.entrypointPath,
     workflowConfig.workflowFileName,
   ];
   workflowMain.on.schedule = workflowConfig.schedule;
@@ -93,6 +94,7 @@ for (scanPath in configJson.paths) {
       context = path.dirname(filePath.path).replace(process.cwd() + "/", "");
       let pushTarget = `${registry}:${tag}`;
       let dockerfilePath = `${context + path.sep + filename}`;
+      let entrypointPath = `${context + path.sep}entrypoint.sh`;
       let workflowName = `构建 ${taskId}-${tag} 镜像`;
       let workflowFileName = `.github/workflows/${taskId}-${tag}.yml`;
       let buildJobName = `build-${taskId}-${tag}`;
@@ -114,6 +116,7 @@ for (scanPath in configJson.paths) {
         buildJobName: buildJobName,
         syncConfigFile: syncConfigFile,
         schedule: configJson.paths[scanPath].schedule,
+        entrypointPath: entrypointPath,
       };
       // 开始填充工作流文件
       // 首先修改主体框架

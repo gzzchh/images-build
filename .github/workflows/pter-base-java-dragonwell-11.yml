@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/base/java/Dockerfile-dragonwell-11
-      - .github/workflows/pter-base-java-dragonwell-11.yml
       - pter/base/java/entrypoint.sh
+      - .github/workflows/pter-base-java-dragonwell-11.yml
   schedule:
     - cron: "30 4 * * 3"
 env:

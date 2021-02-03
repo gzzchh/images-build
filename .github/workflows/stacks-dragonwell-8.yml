@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/cn-jdk/Dockerfile-dragonwell-8
+      - stacks/cn-jdk/entrypoint.sh
       - .github/workflows/stacks-dragonwell-8.yml
   schedule:
     - cron: "25 7 * * 5"

@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/steam/icelakes/Dockerfile
-      - .github/workflows/pter-steam-icelakes.yml
       - pter/steam/icelakes/entrypoint.sh
+      - .github/workflows/pter-steam-icelakes.yml
   schedule:
     - cron: "45 6 5 * *"
 env:

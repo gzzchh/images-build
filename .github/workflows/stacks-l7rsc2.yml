@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/l7rsc2/Dockerfile
+      - stacks/l7rsc2/entrypoint.sh
       - .github/workflows/stacks-l7rsc2.yml
   schedule:
     - cron: "25 7 * * 5"

@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/steam/unturned/Dockerfile
-      - .github/workflows/pter-steam-unturned.yml
       - pter/steam/unturned/entrypoint.sh
+      - .github/workflows/pter-steam-unturned.yml
   schedule:
     - cron: "45 6 5 * *"
 env:

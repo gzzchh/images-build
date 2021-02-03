@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/steam/mordhau/Dockerfile
-      - .github/workflows/pter-steam-mordhau.yml
       - pter/steam/mordhau/entrypoint.sh
+      - .github/workflows/pter-steam-mordhau.yml
   schedule:
     - cron: "45 6 5 * *"
 env:

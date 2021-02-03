@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/smartdns/Dockerfile
+      - stacks/smartdns/entrypoint.sh
       - .github/workflows/stacks-smartdns.yml
   schedule:
     - cron: "25 7 * * 5"

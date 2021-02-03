@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - pter/base/java/Dockerfile-kona-8
-      - .github/workflows/pter-base-java-kona-8.yml
       - pter/base/java/entrypoint.sh
+      - .github/workflows/pter-base-java-kona-8.yml
   schedule:
     - cron: "30 4 * * 3"
 env:

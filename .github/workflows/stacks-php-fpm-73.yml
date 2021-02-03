@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/php-fpm/Dockerfile-php-fpm-73
+      - stacks/php-fpm/entrypoint.sh
       - .github/workflows/stacks-php-fpm-73.yml
   schedule:
     - cron: "25 7 * * 5"

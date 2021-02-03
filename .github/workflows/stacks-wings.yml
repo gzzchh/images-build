@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/wings/Dockerfile
+      - stacks/wings/entrypoint.sh
       - .github/workflows/stacks-wings.yml
   schedule:
     - cron: "25 7 * * 5"

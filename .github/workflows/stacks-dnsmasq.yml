@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/dnsmasq/Dockerfile
+      - stacks/dnsmasq/entrypoint.sh
       - .github/workflows/stacks-dnsmasq.yml
   schedule:
     - cron: "25 7 * * 5"

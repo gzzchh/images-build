@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/v2ray/Dockerfile
+      - stacks/v2ray/entrypoint.sh
       - .github/workflows/stacks-v2ray.yml
   schedule:
     - cron: "25 7 * * 5"

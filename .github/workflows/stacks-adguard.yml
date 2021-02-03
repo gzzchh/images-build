@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - stacks/adguard/Dockerfile
+      - stacks/adguard/entrypoint.sh
       - .github/workflows/stacks-adguard.yml
   schedule:
     - cron: "25 7 * * 5"
