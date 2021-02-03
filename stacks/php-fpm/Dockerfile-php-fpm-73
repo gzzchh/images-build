@@ -87,6 +87,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # 处理用户的部分
 RUN addgroup --gid 1000 www && \
     adduser --disabled-password --gecos "" --uid 1000 --gid 1000 www
+# 添加 PATH 索引
+ENV PATH=$PATH:$HOME/.composer/vendor/bin
 COPY entrypoint.sh /entrypoint.sh
 # 修复权限
 RUN chmod +x /entrypoint.sh
