@@ -4,6 +4,7 @@ RUN apt update && \
     apt install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
+    lsb-release \
     wget \
     curl
 # 安装换源工具
