@@ -1,6 +1,7 @@
 # 第一阶段 配置
 FROM debian:buster
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt update && \
+    apt install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     wget \
@@ -14,7 +15,7 @@ RUN percona-release enable psmdb-44 release
 # 第二阶段 安装
 FROM debian:buster
 # 准备
-RUN apt update \
+RUN apt update && \
     apt install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
@@ -28,12 +29,12 @@ RUN useradd -u 1001 -r -g 0 -s /sbin/nologin \
     -c "Default Application User" mongodb
 ENV PERCONA_MAJOR 44
 # 安装
-RUN apt update \
-    && apt install -y --force-yes \
-    percona-server-mongodb \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /data/db && mkdir -p /data/db \ 
-    && chown -R 1001:0 /data/db
+RUN apt update && \
+    apt install -y --force-yes \
+    percona-server-mongodb && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /data/db && mkdir -p /data/db && \
+    chown -R 1001:0 /data/db
 # 入口点
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
