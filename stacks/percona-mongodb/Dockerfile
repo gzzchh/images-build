@@ -28,7 +28,7 @@ RUN apt update && \
 COPY --from=0 /etc/apt/sources.list.d /etc/apt/sources.list.d
 RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 8507EFA5
 # the numeric UID is needed for OpenShift
-RUN useradd -u 1001 -r -g 0 -s /sbin/nologin \
+RUN useradd -u 1000 -r -g 0 -s /sbin/nologin \
     -c "Default Application User" mongodb
 ENV PERCONA_MAJOR 44
 # 安装
@@ -37,10 +37,10 @@ RUN apt update && \
     percona-server-mongodb && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /data/db && mkdir -p /data/db && \
-    chown -R 1001:0 /data/db
+    chown -R 1000:0 /data/db
 # 入口点
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-USER 1001
+USER 1000
 CMD ["mongod"]
