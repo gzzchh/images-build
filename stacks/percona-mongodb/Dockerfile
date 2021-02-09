@@ -9,8 +9,8 @@ RUN apt update && \
     curl
 # 安装换源工具
 RUN wget -O percona-release.deb https://repo.percona.com/apt/percona-release_latest.buster_all.deb
-# 无论如何都会失败,那就强制无任何输出
-RUN dpkg -i percona-release.deb > /dev/null 2>&1
+# 无论如何都会失败,那就强制不失败
+RUN dpkg -i percona-release.deb || true
 # 启用 MongoDB 44 源
 RUN percona-release enable psmdb-44 release
 
