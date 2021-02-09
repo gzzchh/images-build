@@ -20,6 +20,7 @@ FROM debian:buster
 RUN apt update && \
     apt install -y --no-install-recommends \
     apt-transport-https \
+    gnupg2 \
     ca-certificates \
     pwgen && \
     rm -rf /var/lib/apt/lists/*
