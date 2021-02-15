@@ -1,12 +1,12 @@
-name: "构建 pter-base-java-kona-8 镜像"
+name: "构建 customize-pter-openjdk8-vn 镜像"
 on:
   push:
     paths:
-      - pter/base/java/Dockerfile-kona-8
-      - pter/base/java/entrypoint.sh
-      - .github/workflows/pter-base-java-kona-8.yml
+      - customize/pter-openjdk8-vn/Dockerfile
+      - customize/pter-openjdk8-vn/entrypoint.sh
+      - .github/workflows/customize-pter-openjdk8-vn.yml
   schedule:
-    - cron: "30 4 * * 3"
+    - cron: "45 6 5 * *"
 env:
   TKE_USERNAME: "${{ secrets.TKE_USERNAME }}"
   TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}"
@@ -17,7 +17,7 @@ env:
   HUB_USERNAME: "${{ secrets.HUB_USERNAME }}"
   HUB_PASSWORD: "${{ secrets.HUB_PASSWORD }}"
 jobs:
-  build-pter-base-java-kona-8:
+  build-customize-pter-openjdk8-vn:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
@@ -29,21 +29,21 @@ jobs:
         with:
           username: "${{ secrets.HUB_USERNAME }}"
           password: "${{ secrets.HUB_PASSWORD }}"
-      - name: "构建 pter-base-java-kona-8 镜像"
+      - name: "构建 customize-pter-openjdk8-vn 镜像"
         uses: docker/build-push-action@v2
         with:
-          context: pter/base/java
-          file: pter/base/java/Dockerfile-kona-8
+          context: customize/pter-openjdk8-vn
+          file: customize/pter-openjdk8-vn/Dockerfile
           push: true
-          tags: "gzzchh/pter-base:kona-8"
+          tags: "gzzchh/customize:pter-openjdk8-vn"
   sync-back:
     runs-on: ubuntu-latest
     needs:
-      - build-pter-base-java-kona-8
+      - build-customize-pter-openjdk8-vn
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
       - name: 准备同步工具
         run: "bash ./sync-tool/tools.sh"
       - name: 搬回国内
-        run: "./image-syncer -r 5 --auth ./sync-tool/auth.json --images pter/base/java/kona-8.yml"
+        run: "./image-syncer -r 5 --auth ./sync-tool/auth.json --images customize/pter-openjdk8-vn/pter-openjdk8-vn.yml"

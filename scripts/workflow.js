@@ -19,6 +19,8 @@ const workflowMain = {
     TKE_PASSWORD: "${{ secrets.TKE_PASSWORD }}",
     ACR_USERNAME: "${{ secrets.ACR_USERNAME }}",
     ACR_PASSWORD: "${{ secrets.ACR_PASSWORD }}",
+    ACR_XL_USERNAME: "${{ secrets.ACR_XL_USERNAME }}",
+    ACR_XL_PASSWORD: "${{ secrets.ACR_XL_PASSWORD }}",
     HUB_USERNAME: "${{ secrets.HUB_USERNAME }}",
     HUB_PASSWORD: "${{ secrets.HUB_PASSWORD }}",
   },

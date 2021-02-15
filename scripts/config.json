@@ -26,6 +26,15 @@
         }
       ],
       "extraScanFiles": []
+    },
+    "customize": {
+      "registry": "gzzchh/customize",
+      "schedule": [
+        {
+          "cron": "45 6 5 * *"
+        }
+      ],
+      "extraScanFiles": []
     }
   }
 }
