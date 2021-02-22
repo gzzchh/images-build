@@ -1,13 +1,13 @@
-FROM php:7.3-fpm AS builder 
+FROM php:7.3-fpm AS builder
 
 # COPY pip.conf /root/.pip/pip.conf
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 # RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
-#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
+#     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
 RUN cat /etc/apt/sources.list && \
     DEBIAN_FRONTEND=noninteractive && \
-    # 安装组件
     apt update && \
+    # 安装组件
     apt install -y --no-install-recommends \
     bash \
     unzip \
@@ -43,14 +43,10 @@ RUN cat /etc/apt/sources.list && \
     # 扩展安装
     docker-php-ext-configure gd && \
     docker-php-ext-install -j$(nproc) pdo_mysql pgsql pdo_pgsql mysqli gd exif intl soap zip opcache bcmath && \
-    pecl install xdebug && \
     pecl install runkit7-alpha && \
-    pecl install uopz && \
-    pecl install -o -f redis && \
-    echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     # Imagick
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions imagick && \
+    install-php-extensions imagick uopz xdebug redis xsl && \
     docker-php-source delete
 
 # 只安装需要的东西
