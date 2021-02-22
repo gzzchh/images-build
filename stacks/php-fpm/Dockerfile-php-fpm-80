@@ -42,7 +42,7 @@ RUN cat /etc/apt/sources.list && \
     python3-pip && \
     # 扩展安装
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache bcmath && \
+    docker-php-ext-install -j$(nproc) pdo_mysql pgsql pdo_pgsql mysqli gd exif intl soap opcache bcmath && \
     pecl install xdebug && \
     pecl install runkit7-alpha && \
     pecl install uopz && \
@@ -59,7 +59,7 @@ RUN cat /etc/apt/sources.list && \
     rm composer-setup.php 
 
 # 只安装需要的东西
-FROM php:7.4-fpm AS run
+FROM php:8.0-fpm AS run
 # RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \
 #     sed -i 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list 
 RUN cat /etc/apt/sources.list && \

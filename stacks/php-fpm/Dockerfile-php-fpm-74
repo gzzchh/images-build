@@ -42,7 +42,7 @@ RUN cat /etc/apt/sources.list && \
     python3-pip && \
     # 扩展安装
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache bcmath && \
+    docker-php-ext-install -j$(nproc) pdo_mysql pgsql pdo_pgsql mysqli gd exif intl soap zip opcache bcmath && \
     pecl install xdebug && \
     pecl install runkit7-alpha && \
     pecl install uopz && \
