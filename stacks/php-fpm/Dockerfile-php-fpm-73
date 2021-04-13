@@ -44,11 +44,12 @@ RUN cat /etc/apt/sources.list && \
     docker-php-ext-configure gd && \
     docker-php-ext-install -j$(nproc) pdo_mysql pgsql pdo_pgsql mysqli gd exif intl soap zip opcache bcmath && \
     pecl install runkit7-alpha && \
-    # Imagick
+    # 一些扩展
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions imagick uopz xdebug redis xsl && \
-    docker-php-source delete
-
+    docker-php-source delete && \
+    # 删除自动加载的配置文件
+    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{upoz,xdebug.opcache}.ini
 # 只安装需要的东西
 FROM php:7.3-fpm AS run
 # RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list && \

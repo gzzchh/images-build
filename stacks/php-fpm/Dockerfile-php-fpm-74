@@ -44,14 +44,13 @@ RUN cat /etc/apt/sources.list && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) pdo_mysql pgsql pdo_pgsql mysqli gd exif intl soap zip opcache bcmath && \
     pecl install runkit7-alpha && \
-    # Imagick
+    # 一些扩展
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions imagick uopz xdebug redis xsl && \
     docker-php-source delete && \
-    # Composer相关部分
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
-    rm composer-setup.php 
+    # 删除自动加载的配置文件
+    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{upoz,xdebug.opcache}.ini
+
 
 # 只安装需要的东西
 FROM php:7.4-fpm AS run
