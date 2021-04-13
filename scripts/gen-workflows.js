@@ -53,7 +53,7 @@ function genSyncJob(workflowConfig) {
   // 修改同步文件路径
   syncSteps[
     syncJobLength - 1
-  ].run = `./image-syncer -r 5 --auth ./sync-tool/auth.json --images ${workflowConfig.syncConfigFile}`;
+  ].run = `./image-syncer -r 5 --proc 16 --auth ./sync-tool/auth.json --images ${workflowConfig.syncConfigFile}`;
   // console.log(syncSteps[syncJobLength - 1]);
   return syncJob;
 }

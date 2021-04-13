@@ -46,4 +46,4 @@ jobs:
       - name: 准备同步工具
         run: "bash ./sync-tool/tools.sh"
       - name: 搬回国内
-        run: "./image-syncer -r 5 --auth ./sync-tool/auth.json --images pter/steam/mordhau/mordhau.yml"
+        run: "./image-syncer -r 5 --proc 16 --auth ./sync-tool/auth.json --images pter/steam/mordhau/mordhau.yml"
