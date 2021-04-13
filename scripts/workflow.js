@@ -72,7 +72,7 @@ const syncJob = {
     {
       name: "搬回国内",
       run:
-        "./image-syncer -r 5 --auth ./sync-tool/auth.json --images ${syncConfigFile}",
+        "./image-syncer -r 5 --proc 16 --auth ./sync-tool/auth.json --images ${syncConfigFile}",
     },
   ],
 };
