@@ -49,8 +49,7 @@ RUN cat /etc/apt/sources.list && \
     install-php-extensions imagick uopz xdebug redis xsl && \
     docker-php-source delete && \
     # 删除自动加载的配置文件
-    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{upoz,xdebug.opcache}.ini
-
+    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{uopz,xdebug,opcache}.ini
 
 # 只安装需要的东西
 FROM php:7.4-fpm AS run
