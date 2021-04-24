@@ -46,13 +46,12 @@ RUN cat /etc/apt/sources.list && \
     pecl install runkit7-alpha && \
     # 一些扩展
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions imagick uopz xdebug redis xsl && \
+    install-php-extensions imagick xdebug redis xsl && \
     docker-php-source delete && \
     # 删除自动加载的配置文件
-    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{uopz,xdebug,opcache}.ini && \
+    rm -f /usr/local/etc/php/conf.d/docker-php-ext-{xdebug,opcache}.ini && \
     rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    rm -f /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
-    rm -f /usr/local/etc/php/conf.d/docker-php-ext-uopz.ini
+    rm -f /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 # 只安装需要的东西
 FROM php:7.3-fpm AS run
