@@ -1,9 +1,9 @@
 # ----------------------------------
 # Pterodactyl Core Dockerfile
-# Environment: OpenJDK-8
+# Environment: AmazonCorretto-16
 # Minimum Panel Version: 0.6.0
 # ----------------------------------
-FROM openjdk:8-slim-alpine
+FROM amazoncorretto:16-alpine
 
 RUN apk --no-cache update && \
     apk --no-cache add bash curl wget && \
