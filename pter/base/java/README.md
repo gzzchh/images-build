@@ -13,6 +13,11 @@
 
 没有 Slim 与 Full 之分
 
+## OpenJDK
+
+从 17 开始才有 Alpine 镜像  
+以前的都是 Debian
+
 ## 附加组件
 
 对于 Debian 镜像应该执行下列内容
