@@ -4,5 +4,8 @@
     "klaw-sync": "^6.0.0",
     "prettier": "^2.2.1",
     "yamljs": "^0.3.0"
+  },
+  "scripts": {
+    "build": "node scripts/gen-workflows.js && prettier --write ."
   }
 }

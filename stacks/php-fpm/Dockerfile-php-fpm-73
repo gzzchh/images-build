@@ -46,7 +46,7 @@ RUN cat /etc/apt/sources.list && \
     pecl install runkit7-alpha && \
     # 一些扩展
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions imagick xdebug redis xsl && \
+    install-php-extensions imagick xdebug redis xsl imap && \
     docker-php-source delete && \
     # 删除自动加载的配置文件
     rm -f /usr/local/etc/php/conf.d/docker-php-ext-{xdebug,opcache}.ini && \
