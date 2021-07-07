@@ -59,4 +59,4 @@ jobs:
           MS_TOKEN_n: ${{ secrets.MS_TOKEN_n }}
           CLIENT_ID_n: ${{ secrets.CLIENT_ID_n }}
           CLIENT_SECRET_n: ${{ secrets.CLIENT_SECRET_n }}
-        run: python kkp/ApiOfWrite.py
+        run: python ApiOfWrite.py
