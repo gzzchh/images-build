@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install requests
-        run:  pip install requests
+        run: pip install requests
       - name: run api.Read
         working-directory: kkp
         env:
