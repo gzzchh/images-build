@@ -6,6 +6,8 @@
 
 - [ ] 添加 JDK17 (尽量等所有 JDK 发布以后再做)
 
+关于 distro 和 libc 的对照表,请参考这里
+
 ## Amazon Corretto
 
 非 Alpine 镜像基于 AmazonLinux2 是一个基于 RPM 的 distro
