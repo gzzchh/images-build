@@ -2,9 +2,9 @@ const fs = require("fs-extra");
 const klawSync = require("klaw-sync");
 const path = require("path");
 const workflowData = require("./workflow");
-const YAML = require("yamljs");
+const YAML = require("yaml");
 
-function genWorkflowMain(workflowConfig) {
+function genWorkflowMain(config, workflowConfig) {
   let workflowMain = Object.assign({}, workflowData.workflowMain);
   workflowMain.name = workflowConfig.workflowName;
   // 清空 jobs
@@ -17,7 +17,7 @@ function genWorkflowMain(workflowConfig) {
   ];
   workflowMain.on.schedule = workflowConfig.schedule;
   // 或者是一些需要额外观察的
-  let extraScanFiles = configJson.paths[scanPath].extraScanFiles;
+  let extraScanFiles = config.extraScanFiles;
   if (extraScanFiles.length > 0) {
     extraScanFiles.forEach((extraFile) => {
       let extraWatchFile = `${workflowConfig.context + path.sep + extraFile}`;
@@ -57,14 +57,26 @@ function genSyncJob(workflowConfig) {
   // console.log(syncSteps[syncJobLength - 1]);
   return syncJob;
 }
+function genSyncConfig(config, tag) {
+  // 生成同步的文件信息
+  let registry = config.registry;
+  let mirror = config.mirror;
+  let registryTarget = `${registry}:${tag}`;
+  let mirrorTarget = `${mirror}:${tag}`;
+  // 这是一个 ES6 语法
+  let syncConfig = {
+    [registryTarget]: mirrorTarget,
+  };
+  return syncConfig;
+}
 let configJsonStr = fs
   .readFileSync(path.join(path.dirname(__filename), "config.json"))
   .toString();
 let configJson = JSON.parse(configJsonStr);
-
-for (scanPath in configJson.paths) {
+// 扫数组
+configJson.paths.forEach((config) => {
   // console.log(path);
-  let dockerfileScanPath = path.join(process.cwd(), scanPath);
+  let dockerfileScanPath = path.join(process.cwd(), config.path);
   // console.log(scanPath);
   // 根据配置文件扫描目录
   const files = klawSync(dockerfileScanPath, { nodir: false });
@@ -86,10 +98,10 @@ for (scanPath in configJson.paths) {
         // 那就用后面的部分作为 tag
         tag = filename.replace("Dockerfile-", "");
       }
-      let registry = configJson.paths[scanPath].registry;
+      let registry = config.registry;
       // 这里要用正则匹配
       let regExp = new RegExp(path.sep, "g");
-      let taskId = scanPath.replace(regExp, "-");
+      let taskId = config.path.replace(regExp, "-");
       // 计算一些其他数据
       context = path.dirname(filePath.path).replace(process.cwd() + "/", "");
       let pushTarget = `${registry}:${tag}`;
@@ -115,12 +127,16 @@ for (scanPath in configJson.paths) {
         workflowFileName: workflowFileName,
         buildJobName: buildJobName,
         syncConfigFile: syncConfigFile,
-        schedule: configJson.paths[scanPath].schedule,
+        schedule: config.schedule,
         entrypointPath: entrypointPath,
       };
+      // 制作同步配置文件
+      // 左边是 registry:tag
+      // 右边是 mirror:tag
+      let syncConfig = genSyncConfig(config, tag);
       // 开始填充工作流文件
       // 首先修改主体框架
-      let workflowMain = genWorkflowMain(workflowConfig);
+      let workflowMain = genWorkflowMain(config, workflowConfig);
       // 修改构建阶段
       let buildJob = genBuildJob(workflowConfig);
       // 修改同步阶段
@@ -128,13 +144,18 @@ for (scanPath in configJson.paths) {
       // 把两个任务塞进去
       workflowMain.jobs[buildJobName] = buildJob;
       workflowMain.jobs["sync-back"] = syncJob;
-      // 写入生成的文件
-      workflowFileStr = YAML.stringify(workflowMain, 6);
+      // 序列化
+      YAML.scalarOptions.str.fold.lineWidth = 0;
+      workflowFileStr = YAML.stringify(workflowMain);
+      syncConfigStr = YAML.stringify(syncConfig);
       // fs.writeFileSync(
       // 	`${process.cwd()}/.github/test/${taskId}-${tag}.yml`,
       // 	workflowFileStr
       // );
+      // 写入工作流配置
       fs.writeFileSync(workflowFileName, workflowFileStr);
+      // 写入同步配置
+      fs.writeFileSync(syncConfigFile, syncConfigStr);
     }
   });
-}
+});

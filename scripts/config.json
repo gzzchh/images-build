@@ -1,7 +1,9 @@
 {
-  "paths": {
-    "stacks": {
+  "paths": [
+    {
+      "path": "stacks",
       "registry": "gzzchh/stacks",
+      "mirror": "ccr.ccs.tencentyun.com/gzzchh/stacks",
       "schedule": [
         {
           "cron": "25 7 * * 5"
@@ -9,8 +11,10 @@
       ],
       "extraScanFiles": []
     },
-    "pter/base/java": {
+    {
+      "path": "pter/base/java",
       "registry": "gzzchh/pter-base",
+      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/base",
       "schedule": [
         {
           "cron": "30 4 * * 2"
@@ -18,8 +22,21 @@
       ],
       "extraScanFiles": []
     },
-    "pter/steam": {
+    {
+      "path": "pter/base/java-glibc",
+      "registry": "gzzchh/pter-base",
+      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/base",
+      "schedule": [
+        {
+          "cron": "30 4 * * 2"
+        }
+      ],
+      "extraScanFiles": []
+    },
+    {
+      "path": "pter/steam",
       "registry": "gzzchh/pter-steam",
+      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/steam",
       "schedule": [
         {
           "cron": "45 6 5 * *"
@@ -27,8 +44,10 @@
       ],
       "extraScanFiles": []
     },
-    "customize": {
+    {
+      "path": "customize",
       "registry": "gzzchh/customize",
+      "mirror": "registry.cn-hangzhou.aliyuncs.com/miannet/miannet",
       "schedule": [
         {
           "cron": "45 6 5 * *"
@@ -36,5 +55,5 @@
       ],
       "extraScanFiles": []
     }
-  }
+  ]
 }

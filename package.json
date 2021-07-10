@@ -3,7 +3,7 @@
     "fs-extra": "^9.0.1",
     "klaw-sync": "^6.0.0",
     "prettier": "^2.2.1",
-    "yamljs": "^0.3.0"
+    "yaml": "^1.10.2"
   },
   "scripts": {
     "build": "node scripts/gen-workflows.js && prettier --write ."
