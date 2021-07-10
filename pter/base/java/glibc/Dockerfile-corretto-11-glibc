@@ -5,7 +5,7 @@
 # ----------------------------------
 FROM amazoncorretto:11
 
-RUN yum install -y bash curl wget && \
+RUN yum install -y bash curl wget shadow-utils && \
     yum clean all && \
     rm -rf /var/lib/{cache,log}/ && \
     adduser -D -h /home/container container

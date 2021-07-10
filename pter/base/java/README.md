@@ -86,7 +86,7 @@ RUN apk --no-cache update && \
 对于基于 RPM 的镜像应该执行下列内容
 
 ```dockerfile
-RUN yum install -y bash curl wget && \
+RUN yum install -y bash curl wget shadow-utils && \
     yum clean all && \
     rm -rf /var/lib/{cache,log}/ && \
     adduser -D -h /home/container container
