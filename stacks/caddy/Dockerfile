@@ -12,4 +12,4 @@ FROM alpine
 COPY --from=0 /build/caddy /caddy
 ENV XDG_CONFIG_HOME=/config
 ENV XDG_DATA_HOME=/data
-CMD ["caddy" "run" "--config" "/etc/caddy/Caddyfile" "--adapter" "caddyfile"]
+CMD ["/caddy" "run" "--config" "/etc/caddy/Caddyfile" "--adapter" "caddyfile"]
