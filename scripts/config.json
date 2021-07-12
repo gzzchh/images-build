@@ -14,7 +14,7 @@
     {
       "path": "pter/base/java",
       "registry": "gzzchh/pter-base",
-      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/base",
+      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/java",
       "schedule": [
         {
           "cron": "25 9 * * 2"
@@ -22,7 +22,6 @@
       ],
       "extraScanFiles": []
     },
-
     {
       "path": "pter/steam",
       "registry": "gzzchh/pter-steam",
