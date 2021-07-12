@@ -7,6 +7,6 @@
   },
   "scripts": {
     "build": "node scripts/gen-workflows.js && prettier --write .",
-    "clean": "rm .github/workflows/*.yml"
+    "clean": "rm .github/workflows/*.yml && cp kkp/*.yml .github/workflows/"
   }
 }
