@@ -6,6 +6,7 @@
     "yaml": "^1.10.2"
   },
   "scripts": {
-    "build": "node scripts/gen-workflows.js && prettier --write ."
+    "build": "node scripts/gen-workflows.js && prettier --write .",
+    "clean": "rm .github/workflows/*.yml"
   }
 }
