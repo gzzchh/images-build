@@ -12,12 +12,23 @@
       "extraScanFiles": []
     },
     {
-      "path": "pter/base/java",
-      "registry": "gzzchh/pter-base",
+      "path": "pter/java",
+      "registry": "gzzchh/pter-java",
       "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/java",
       "schedule": [
         {
           "cron": "25 9 * * 2"
+        }
+      ],
+      "extraScanFiles": []
+    },
+    {
+      "path": "pter/other",
+      "registry": "gzzchh/pter-other",
+      "mirror": "ccr.ccs.tencentyun.com/pterodactyl-cn/other",
+      "schedule": [
+        {
+          "cron": "30 10 * * 2"
         }
       ],
       "extraScanFiles": []
